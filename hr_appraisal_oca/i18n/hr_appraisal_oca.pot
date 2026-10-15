@@ -964,7 +964,7 @@ msgstr ""
 #. module: hr_appraisal_oca
 #. odoo-python
 #: code:addons/hr_appraisal_oca/wizard/send_mail_with_template_wizard.py:0
-msgid "Template with XML ID {template_xml_id} not found."
+msgid "Template with XML ID %(template_xml_id)s not found."
 msgstr ""
 
 #. module: hr_appraisal_oca
@@ -1070,7 +1070,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_appraisal_oca/wizard/hr_appraisal_wizard.py:0
 msgid ""
-"{user_name} decided, as Appraisal Officer, to publish the employee's "
+"%(user_name)s decided, as Appraisal Officer, to publish the employee's "
 "feedback"
 msgstr ""
 

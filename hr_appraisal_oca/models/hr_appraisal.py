@@ -1,21 +1,18 @@
 # Copyright 2025 Fundacion Esment - Estefanía Bauzá
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import datetime
-
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class HrAppraisal(models.Model):
     _name = "hr.appraisal"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]  # noqa: RUF012
     _rec_name = "employee_id"
     _description = "Employee Appraisal"
     _order = "state desc, date_close, id desc"
 
     employee_id = fields.Many2one(
         "hr.employee",
-        string="Employee",
         required=True,
         default=lambda self: self._default_employee_id(),
         readonly=True,
@@ -49,13 +46,11 @@ class HrAppraisal(models.Model):
     )
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         related="employee_id.company_id",
         store=True,
     )
     appraisal_template_id = fields.Many2one(
         "hr.appraisal.template",
-        string="Appraisal Template",
         check_company=True,
     )
     state = fields.Selection(
@@ -132,7 +127,7 @@ class HrAppraisal(models.Model):
             default_template_id = int(
                 self.env["ir.config_parameter"]
                 .sudo()
-                .get_param("hr_appraisal_oca.default_appraisal_template_id", 0)
+                .get_int("hr_appraisal_oca.default_appraisal_template_id", 0)
             )
             if default_template_id:
                 res["appraisal_template_id"] = default_template_id
@@ -204,7 +199,8 @@ class HrAppraisal(models.Model):
         Employee = self.env["hr.employee"]
         user = self.env.user
         if user.has_group("hr_appraisal_oca.group_appraisal_hr_officer"):
-            allowed = Employee.search([])
+            # HR officers may appraise every employee
+            allowed = Employee.search([])  # pylint: disable=no-search-all
         else:
             employee, subordinates = self._get_current_employee_and_subordinates()
             if employee:
@@ -236,7 +232,7 @@ class HrAppraisal(models.Model):
         close_appraisal = vals.get("state") == "3_done"
         appraisal_activity_ref = None
         if close_appraisal:
-            vals["date_close"] = datetime.date.today()
+            vals["date_close"] = fields.Date.today()
             appraisal_activity_ref = self.env.ref(
                 "hr_appraisal_oca.mail_act_hr_appraisal_cfr"
             )
@@ -395,8 +391,8 @@ class HrAppraisal(models.Model):
             self.activity_schedule(
                 "hr_appraisal_oca.mail_act_hr_appraisal_cfr",
                 date_deadline=self.date_close,
-                summary=_("Appraisal Form to Fill"),
-                note=_(
+                summary=self.env._("Appraisal Form to Fill"),
+                note=self.env._(
                     "Fill appraisal for %(employee)s ", employee=self.employee_id.name
                 ),
                 user_id=user_id,
@@ -404,7 +400,7 @@ class HrAppraisal(models.Model):
 
     def action_open_employee_appraisals(self):
         return {
-            "name": _("Previous Appraisals"),
+            "name": self.env._("Previous Appraisals"),
             "type": "ir.actions.act_window",
             "view_mode": "list,form",
             "res_model": "hr.appraisal",
@@ -424,7 +420,7 @@ class HrAppraisal(models.Model):
             view_id = self.env.ref("hr_appraisal_oca.hr_appraisal_wizard_form_view").id
             view_item = [(view_id, "form")]
             return {
-                "name": _("Confirmation"),
+                "name": self.env._("Confirmation"),
                 "view_type": "form",
                 "view_mode": "form",
                 "view_id": view_id,
@@ -450,6 +446,6 @@ class HrAppraisal(models.Model):
                 "view_mode": "form",
                 "res_model": "hr.appraisal.request.wizard",
                 "target": "new",
-                "name": _("Appraisal Request"),
+                "name": self.env._("Appraisal Request"),
                 "context": {"default_appraisal_id": self.id},
             }

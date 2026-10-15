@@ -46,7 +46,7 @@
                             class="oe_stat_button"
                             name="action_open_employee_appraisals"
                             groups="hr.group_hr_user"
-                            icon="fa-th-large"
+                            icon="grid_view"
                             type="object"
                             invisible="employee_appraisal_count &lt; 2 or not employee_id"
                         >
@@ -150,7 +150,7 @@
                                                     class="btn btn-light"
                                                     name="action_publish_employee_feedback"
                                                     type="object"
-                                                    icon="fa-circle-o"
+                                                    icon="radio_button_unchecked"
                                                     invisible="employee_feedback_published or (state == '1_new' and employee_user_id == uid)"
                                                 >
                                                     <field
@@ -163,7 +163,7 @@
                                                     class="btn btn-light"
                                                     name="action_publish_employee_feedback"
                                                     type="object"
-                                                    icon="fa-check-circle"
+                                                    icon="check_circle"
                                                     invisible="not employee_feedback_published or (state == '1_new' and employee_user_id == uid)"
                                                 >
                                                     <field
@@ -228,7 +228,7 @@
                                                     style="background-color: #e7e9ed; border-color: #e7e9ed; color: #66598f;"
                                                     name="action_publish_manager_feedback"
                                                     type="object"
-                                                    icon="fa-circle-o"
+                                                    icon="radio_button_unchecked"
                                                     invisible="manager_feedback_published or not can_see_manager_publish"
                                                 >
                                                     <field
@@ -242,7 +242,7 @@
                                                     style="background-color: #e7e9ed; border-color: #e7e9ed; color: #66598f;"
                                                     name="action_publish_manager_feedback"
                                                     type="object"
-                                                    icon="fa-check-circle"
+                                                    icon="check_circle"
                                                     invisible="not manager_feedback_published or not can_see_manager_publish"
                                                 >
                                                     <field
@@ -389,11 +389,11 @@
                     date="date_close"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Employee"
                         name="employee"
-                        icon="fa-user"
+                        icon="person"
                         domain="[]"
                         context="{'group_by': 'employee_id',
                             'no_create': True,

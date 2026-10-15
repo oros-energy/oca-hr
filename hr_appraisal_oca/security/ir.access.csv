@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_appraisal_all,Appraisals - User Access,hr.appraisal,base.group_user,crud,"['&', '|', '|', ('employee_id.user_id', '=', user.id), ('employee_id.allowed_user_ids', 'in', [user.id]), ('manager_ids.user_id', 'in', [user.id]), '|', ('visibility', '=', 'all'), '&', ('visibility', '=', 'manager'), ('manager_ids.user_id', 'in', [user.id])]"
+hr_appraisal_hr_officer_rule,Appraisals - HR Officer Full Access,hr.appraisal,hr_appraisal_oca.group_appraisal_hr_officer,crud,
+hr_appraisal_comp_rule,Appraisal multi-company,hr.appraisal,,crud,"[('company_id', 'in', company_ids + [False])]"
+access_hr_appraisal_template_all,hr.appraisal.template all,hr.appraisal.template,base.group_user,crud,
+access_send_email_with_template_all,hr.appraisal.send_email_with_template all,send.email.with.template,base.group_user,crud,
+access_hr_appraisal_tag_all,hr.appraisal.tag all,hr.appraisal.tag,base.group_user,crud,
+access_hr_appraisal_wizard_user,hr.appraisal.wizard user,hr.appraisal.wizard,hr_appraisal_oca.group_appraisal_user,crud,
+access_hr_appraisal_request_wizard_user,hr.appraisal.request.wizard user,hr.appraisal.request.wizard,hr_appraisal_oca.group_appraisal_user,crud,

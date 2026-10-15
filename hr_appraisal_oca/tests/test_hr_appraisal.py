@@ -9,6 +9,9 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestHrAppraisalEmployee(BaseCommon):
+    # Run as superuser, these tests do not cover the access rules
+    _test_user_groups = ()
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -54,7 +57,7 @@ class TestHrAppraisalEmployee(BaseCommon):
                 "appraisal_manager_feedback_template": "<p>Manager Feedback</p>",
             }
         )
-        cls.env["ir.config_parameter"].sudo().set_param(
+        cls.env["ir.config_parameter"].sudo().set_int(
             "hr_appraisal_oca.default_appraisal_template_id", cls.template.id
         )
         cls.tag = cls.Tag.create(

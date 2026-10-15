@@ -1,11 +1,11 @@
 # Copyright 2025 Fundacion Esment - Estefanía Bauzá
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
-class HrEmployeeBase(models.AbstractModel):
-    _inherit = "hr.employee.base"
+class HrEmployee(models.Model):
+    _inherit = "hr.employee"
 
     last_appraisal_id = fields.Many2one(
         "hr.appraisal",
@@ -24,7 +24,7 @@ class HrEmployeeBase(models.AbstractModel):
         if self.ongoing_appraisal_count > 1:
             action.update(
                 {
-                    "name": _("New and Pending Appraisals"),
+                    "name": self.env._("New and Pending Appraisals"),
                     "view_mode": "list,form",
                     "domain": [
                         ("employee_id", "=", self.id),
@@ -68,16 +68,12 @@ class HrEmployeeBase(models.AbstractModel):
                 allowed and employee.last_appraisal_id
             )
 
-
-class HrEmployee(models.Model):
-    _inherit = "hr.employee"
-
     appraisal_count = fields.Integer(
         compute="_compute_appraisal_count",
         store=True,
         groups="hr.group_hr_user",
     )
-    appraisal_ids = fields.One2many("hr.appraisal", "employee_id", string="Appraisal")
+    appraisal_ids = fields.One2many("hr.appraisal", "employee_id")
     last_appraisal_state = fields.Selection(
         related="last_appraisal_id.state", string="Status"
     )

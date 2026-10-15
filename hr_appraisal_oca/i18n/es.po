@@ -1146,8 +1146,8 @@ msgstr "Etiquetas"
 #. module: hr_appraisal_oca
 #. odoo-python
 #: code:addons/hr_appraisal_oca/wizard/send_mail_with_template_wizard.py:0
-msgid "Template with XML ID {template_xml_id} not found."
-msgstr "No se encontró la plantilla con ID XML {template_xml_id}."
+msgid "Template with XML ID %(template_xml_id)s not found."
+msgstr "No se encontró la plantilla con ID XML %(template_xml_id)s."
 
 #. module: hr_appraisal_oca
 #: model:ir.model.fields,help:hr_appraisal_oca.field_hr_appraisal__note
@@ -1261,9 +1261,9 @@ msgstr "una vez publicada"
 #. odoo-python
 #: code:addons/hr_appraisal_oca/wizard/hr_appraisal_wizard.py:0
 msgid ""
-"{user_name} decided, as Appraisal Officer, to publish the employee's feedback"
+"%(user_name)s decided, as Appraisal Officer, to publish the employee's feedback"
 msgstr ""
-"{user_name} decidió, como Evaluador, publicar los comentarios del empleado"
+"%(user_name)s decidió, como Evaluador, publicar los comentarios del empleado"
 
 #. module: hr_appraisal_oca
 #: model:mail.template,subject:hr_appraisal_oca.mail_template_appraisal_request_from_employee

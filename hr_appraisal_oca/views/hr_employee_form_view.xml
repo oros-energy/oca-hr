@@ -14,7 +14,7 @@
                 <button
                     name="action_open_last_appraisal"
                     class="oe_stat_button"
-                    icon="fa-th-large"
+                    icon="grid_view"
                     invisible="not can_open_last_appraisal"
                     type="object"
                 >

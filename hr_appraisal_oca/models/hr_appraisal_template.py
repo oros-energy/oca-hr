@@ -25,7 +25,7 @@ class HrAppraisalTemplate(models.Model):
         default_template_id = int(
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("hr_appraisal_oca.default_appraisal_template_id", 0)
+            .get_int("hr_appraisal_oca.default_appraisal_template_id", 0)
         )
         for rec in self:
             rec.is_default = rec.id == default_template_id
