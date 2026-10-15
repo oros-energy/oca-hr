@@ -5,7 +5,7 @@
 
 {
     "name": "Employee Birth Name",
-    "version": "16.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Human Resources",
     "author": "Camptocamp SA,Odoo Community Association (OCA),Open Source Integrators",
     "website": "https://github.com/OCA/hr",

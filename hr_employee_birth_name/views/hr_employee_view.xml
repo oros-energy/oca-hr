@@ -9,8 +9,8 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
-            <field name="marital" position="after">
-                <field name='birth_name' />
+            <field name="legal_name" position="after">
+                <field name="birth_name" />
             </field>
         </field>
     </record>
